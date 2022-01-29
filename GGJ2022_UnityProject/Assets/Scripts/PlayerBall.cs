@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class PlayerBall : MonoBehaviour
 {
+    GameManager gameManager;
+    MalusManager malusManager;
+
     [SerializeField] GameObject dashState;
     [SerializeField] GameObject ball;
+
+    private void Awake()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+        malusManager = FindObjectOfType<MalusManager>();
+    }
+
     public void LooseBall() 
     {
         if (dashState.activeSelf == false)
@@ -18,5 +28,31 @@ public class PlayerBall : MonoBehaviour
 
             gameObject.SetActive(false);
         }
+    }
+
+    private void OnEnable()
+    {
+        malusManager.GiveMalus(transform.parent.gameObject);
+    }
+
+    private void OnDisable()
+    {
+        malusManager.EndMalus();
+    }
+
+    private void Update()
+    {
+        float alpha = Time.deltaTime / gameManager.winDuration;
+
+        if (transform.parent.GetComponent<PlayerControls>().playerNumber == PlayerNumber.PlayerOne && gameManager.playerOneScore < 100f)
+        {
+            gameManager.playerOneScore += alpha * 100;
+        }
+        else if ((transform.parent.GetComponent<PlayerControls>().playerNumber == PlayerNumber.PlayerTwo && gameManager.playerTwoScore < 100f))
+        {
+            gameManager.playerTwoScore += alpha * 100;
+        }
+
+        gameManager.UpdateText();
     }
 }

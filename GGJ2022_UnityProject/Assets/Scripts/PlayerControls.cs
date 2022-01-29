@@ -14,12 +14,14 @@ public class PlayerControls : MonoBehaviour
 
 
     Rigidbody2D rb;
+    SpriteRenderer spriteRend;
 
     float currentMoveSpeed;
     float horizontalMove;
     public bool isGrounded;
     public bool hasInput;
     public bool dashAvailable;
+    bool isFacingRight = true;
     Vector2 rawInputs;
 
     float initialGravityScale;
@@ -27,6 +29,7 @@ public class PlayerControls : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRend = GetComponentInChildren<SpriteRenderer>();
         currentMoveSpeed = moveSpeed;
         dashAvailable = true;
         initialGravityScale = rb.gravityScale;
@@ -37,6 +40,16 @@ public class PlayerControls : MonoBehaviour
         if (hasInput == true)
         {
             horizontalMove = Input.GetAxis("Horizontal");
+
+            if (horizontalMove > 0 && !isFacingRight)
+            {
+                Flip();
+            }
+
+            if (horizontalMove < 0 && isFacingRight)
+            {
+                Flip();
+            }
 
             if (Input.GetButtonDown("Jump") && isGrounded) 
             {
@@ -71,7 +84,9 @@ public class PlayerControls : MonoBehaviour
     private void FixedUpdate()
     {
         if (hasInput == true)
+        {
             rb.velocity = new Vector2((horizontalMove * currentMoveSpeed), rb.velocity.y);
+        }
     }
 
     void Jump() 
@@ -158,5 +173,11 @@ public class PlayerControls : MonoBehaviour
         }
 
         return rawInputs;
+    }
+
+    void Flip() 
+    {
+        isFacingRight = !isFacingRight;
+        spriteRend.flipX = !spriteRend.flipX;
     }
 }

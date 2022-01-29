@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
+    DataManager dataManager;
+
+    [Header("Player variables, change Data Manager instead!")]
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpForce;
     [SerializeField] float airControl;
     [SerializeField] float dashForce;
     [SerializeField] float dashDuration;
-
     [SerializeField] float dashCooldownTime;
 
 
@@ -18,6 +20,7 @@ public class PlayerControls : MonoBehaviour
 
     float currentMoveSpeed;
     float horizontalMove;
+    [Header("Local variables")]
     public bool isGrounded;
     public bool hasInput;
     public bool dashAvailable;
@@ -28,8 +31,21 @@ public class PlayerControls : MonoBehaviour
 
     private void Awake()
     {
+        dataManager = FindObjectOfType<DataManager>();
         rb = GetComponent<Rigidbody2D>();
         spriteRend = GetComponentInChildren<SpriteRenderer>();
+
+        rb.mass = dataManager.mass;
+        rb.drag = dataManager.linearDrag;
+        rb.gravityScale = dataManager.gravityScale;
+
+        moveSpeed = dataManager.moveSpeed;
+        jumpForce = dataManager.jumpForce;
+        airControl = dataManager.airControl;
+        dashForce = dataManager.dashForce;
+        dashDuration = dataManager.dashDuration;
+        dashCooldownTime = dataManager.dashCooldownTime;
+        
         currentMoveSpeed = moveSpeed;
         dashAvailable = true;
         initialGravityScale = rb.gravityScale;

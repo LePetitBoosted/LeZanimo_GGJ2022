@@ -32,6 +32,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] bool isFacingRight;
     [SerializeField] GameObject normalState;
     [SerializeField] GameObject dashState;
+    [SerializeField] GameObject playerBall;
     Vector2 rawInputs;
 
     float initialGravityScale;
@@ -233,5 +234,10 @@ public class PlayerControls : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         hasInput = true;
+    }
+
+    public void CatchBall() 
+    {
+        playerBall.SetActive(true);
     }
 }

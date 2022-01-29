@@ -39,6 +39,8 @@ public class PlayerControls : MonoBehaviour
     float initialGravityScale;
 
     public float inputLag = 0;
+    public string horizontalStr = "Horizontal P";
+    public string verticalStr = "Vertical P";
 
     private void Awake()
     {
@@ -75,7 +77,7 @@ public class PlayerControls : MonoBehaviour
     {
         if (hasInput == true)
         {
-            horizontalMove = Input.GetAxis("Horizontal P" + playerID);
+            horizontalMove = Input.GetAxis(horizontalStr + playerID);
 
             if (horizontalMove > 0 && !isFacingRight)
             {
@@ -119,9 +121,9 @@ public class PlayerControls : MonoBehaviour
         GetInputRaw();
 
         Vector2 dashDir;
-        if (Mathf.Abs(Input.GetAxis("Horizontal P" + playerID)) > 0 || Mathf.Abs(Input.GetAxis("Vertical P" + playerID)) > 0)
+        if (Mathf.Abs(Input.GetAxis(horizontalStr + playerID)) > 0 || Mathf.Abs(Input.GetAxis(verticalStr + playerID)) > 0)
         {
-            if (Mathf.Abs(Input.GetAxis("Horizontal P" + playerID)) > Mathf.Abs(Input.GetAxis("Vertical P" + playerID)))
+            if (Mathf.Abs(Input.GetAxis(horizontalStr + playerID)) > Mathf.Abs(Input.GetAxis(verticalStr + playerID)))
             {
                 dashDir = new Vector2(rawInputs.x, 0);
             }
@@ -207,11 +209,11 @@ public class PlayerControls : MonoBehaviour
 
     Vector2 GetInputRaw() 
     {
-        if (Input.GetAxis("Horizontal P" + playerID) != 0)
+        if (Input.GetAxis(horizontalStr + playerID) != 0)
         {
-            if (Input.GetAxis("Horizontal P" + playerID) > 0)
+            if (Input.GetAxis(horizontalStr + playerID) > 0)
                 rawInputs.x = 1;
-            if (Input.GetAxis("Horizontal P" + playerID) < 0)
+            if (Input.GetAxis(horizontalStr + playerID) < 0)
                 rawInputs.x = -1;
         }
         else
@@ -219,11 +221,11 @@ public class PlayerControls : MonoBehaviour
             rawInputs.x = 0;
         }
 
-        if (Input.GetAxis("Vertical P" + playerID) != 0)
+        if (Input.GetAxis(verticalStr + playerID) != 0)
         {
-            if (Input.GetAxis("Vertical P" + playerID) > 0)
+            if (Input.GetAxis(verticalStr + playerID) > 0)
                 rawInputs.y = 1;
-            if (Input.GetAxis("Vertical P" + playerID) < 0)
+            if (Input.GetAxis(verticalStr + playerID) < 0)
                 rawInputs.y = -1;
         }
         else

@@ -5,13 +5,15 @@ using UnityEngine;
 public class PlayerBall : MonoBehaviour
 {
     GameManager gameManager;
+    MalusManager malusManager;
 
     [SerializeField] GameObject dashState;
     [SerializeField] GameObject ball;
 
     private void Awake()
     {
-        gameManager = FindObjectOfType<GameManager>();    
+        gameManager = FindObjectOfType<GameManager>();
+        malusManager = FindObjectOfType<MalusManager>();
     }
 
     public void LooseBall() 
@@ -26,6 +28,16 @@ public class PlayerBall : MonoBehaviour
 
             gameObject.SetActive(false);
         }
+    }
+
+    private void OnEnable()
+    {
+        malusManager.GiveMalus(transform.parent.gameObject);
+    }
+
+    private void OnDisable()
+    {
+        malusManager.EndMalus();
     }
 
     private void Update()

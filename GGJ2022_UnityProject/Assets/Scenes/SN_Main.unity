@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 29662293}
   - component: {fileID: 29662294}
+  - component: {fileID: 29662295}
   m_Layer: 0
   m_Name: InputLagMalus
   m_TagString: Untagged
@@ -167,6 +168,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2536a3b522dd0ad41a7e425518324bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &29662295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29662292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd44916cdde4144baab474cb21611c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  malusLevel: {x: 60, y: 100}
 --- !u!1 &102598981
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,6 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 102598982}
   - component: {fileID: 102598983}
+  - component: {fileID: 102598984}
   m_Layer: 0
   m_Name: RollbackMalus
   m_TagString: Untagged
@@ -211,6 +226,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ee4ebb7192f2ac41a627d00932f5ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &102598984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102598981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd44916cdde4144baab474cb21611c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  malusLevel: {x: 50, y: 100}
 --- !u!1 &252755313
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,11 +597,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.57
---- !u!1 &555824823 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2597524390826027650, guid: 84b21ad6dcbd67b4cb092def38aa7c3b, type: 3}
-  m_PrefabInstance: {fileID: 2597524389550533870}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &557002185
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,6 +829,7 @@ GameObject:
   m_Component:
   - component: {fileID: 669296855}
   - component: {fileID: 669296856}
+  - component: {fileID: 669296857}
   m_Layer: 0
   m_Name: PermanentJumpMalus
   m_TagString: Untagged
@@ -841,11 +865,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malusManager: {fileID: 1980024996}
---- !u!1 &803710048 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1397807875953906925, guid: 0c1436e2fd99df8448b386e50fcf0e88, type: 3}
-  m_PrefabInstance: {fileID: 3980713425134687155}
+--- !u!114 &669296857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669296854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd44916cdde4144baab474cb21611c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  malusLevel: {x: 0, y: 50}
 --- !u!1 &822053619
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,6 +1564,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1370125146}
   - component: {fileID: 1370125147}
+  - component: {fileID: 1370125148}
   m_Layer: 0
   m_Name: HellVibrationsMalus
   m_TagString: Untagged
@@ -1566,6 +1599,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20efd6dc0ff646f4daba34ec80bb7e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1370125148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370125145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd44916cdde4144baab474cb21611c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  malusLevel: {x: 0, y: 50}
 --- !u!4 &1410041453 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2597524390826027651, guid: 84b21ad6dcbd67b4cb092def38aa7c3b, type: 3}
@@ -1613,6 +1659,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1595897024}
   - component: {fileID: 1595897025}
+  - component: {fileID: 1595897026}
   m_Layer: 0
   m_Name: BlackCircleMalus
   m_TagString: Untagged
@@ -1647,6 +1694,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522707952cc979649a6abc5876df54d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1595897026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595897023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd44916cdde4144baab474cb21611c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  malusLevel: {x: 0, y: 50}
 --- !u!1 &1645472522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1657,6 +1717,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1645472523}
   - component: {fileID: 1645472524}
+  - component: {fileID: 1645472525}
   m_Layer: 0
   m_Name: ChangedDirectionsMalus
   m_TagString: Untagged
@@ -1691,6 +1752,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4436503478c8f9c4d90e76e445f7aad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1645472525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645472522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd44916cdde4144baab474cb21611c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  malusLevel: {x: 60, y: 100}
 --- !u!1 &1659598215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1701,6 +1775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1659598216}
   - component: {fileID: 1659598217}
+  - component: {fileID: 1659598218}
   m_Layer: 0
   m_Name: LifeIsABitchMalus
   m_TagString: Untagged
@@ -1735,6 +1810,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88978ac1affa9204ca1d9468a4afd3a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1659598218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659598215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd44916cdde4144baab474cb21611c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  malusLevel: {x: 70, y: 100}
 --- !u!1 &1695531726
 GameObject:
   m_ObjectHideFlags: 0
@@ -1967,6 +2055,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1948189898}
   - component: {fileID: 1948189899}
+  - component: {fileID: 1948189900}
   m_Layer: 0
   m_Name: SpontaneousDashMalus
   m_TagString: Untagged
@@ -2004,6 +2093,19 @@ MonoBehaviour:
   malusManager: {fileID: 1980024996}
   minInterval: 2
   maxInterval: 5
+--- !u!114 &1948189900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948189897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd44916cdde4144baab474cb21611c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  malusLevel: {x: 20, y: 70}
 --- !u!1 &1980024994
 GameObject:
   m_ObjectHideFlags: 0
@@ -2056,8 +2158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb5aba5460641f4ea09fb870665c023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerOne: {fileID: 555824823}
-  PlayerTwo: {fileID: 803710048}
   malusList:
   - {fileID: 102598981}
   - {fileID: 1948189897}

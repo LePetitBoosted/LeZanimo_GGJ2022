@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlayerNumber { PlayerOne, PlayerTwo };
+
 public class PlayerControls : MonoBehaviour
 {
-    enum PlayerNumber {PlayerOne, PlayerTwo};
     [Header("Set Player Number")]
-    [SerializeField] PlayerNumber playerNumber;
+    public PlayerNumber playerNumber;
     int playerID;
 
     DataManager dataManager;
@@ -32,6 +33,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] bool isFacingRight;
     [SerializeField] GameObject normalState;
     [SerializeField] GameObject dashState;
+    [SerializeField] GameObject playerBall;
     Vector2 rawInputs;
 
     float initialGravityScale;
@@ -233,5 +235,10 @@ public class PlayerControls : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         hasInput = true;
+    }
+
+    public void CatchBall() 
+    {
+        playerBall.SetActive(true);
     }
 }

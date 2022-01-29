@@ -1477,6 +1477,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1315520103}
   m_CullTransparentMesh: 1
+--- !u!1 &1370125145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1370125146}
+  - component: {fileID: 1370125147}
+  m_Layer: 0
+  m_Name: HellVibrationsMalus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1370125146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370125145}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1980024995}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1370125147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370125145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20efd6dc0ff646f4daba34ec80bb7e4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1410041453 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2597524390826027651, guid: 84b21ad6dcbd67b4cb092def38aa7c3b, type: 3}
@@ -1905,6 +1949,7 @@ Transform:
   - {fileID: 29662293}
   - {fileID: 1595897024}
   - {fileID: 1659598216}
+  - {fileID: 1370125146}
   m_Father: {fileID: 913319390}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1928,6 +1973,7 @@ MonoBehaviour:
   - {fileID: 29662292}
   - {fileID: 1595897023}
   - {fileID: 1659598215}
+  - {fileID: 1370125145}
   targetPlayer: {fileID: 0}
 --- !u!1 &2007331374
 GameObject:

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     [SerializeField] float ballSpeed;
+    bool canBeCatch;
 
     Rigidbody2D rb;
 
@@ -15,8 +16,10 @@ public class Ball : MonoBehaviour
 
     private void OnEnable()
     {
+        StartCoroutine(CatchDelay());
+
         Vector2 firstMove = new Vector2(Random.Range(0.01f, 1f), Random.Range(0.01f, 1f));
-        rb.AddForce(firstMove * 1000f, ForceMode2D.Impulse);
+        rb.AddForce(firstMove * ballSpeed, ForceMode2D.Impulse);
     }
 
     private void FixedUpdate()
@@ -27,12 +30,23 @@ public class Ball : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if(collision.gameObject.layer == 3) 
+        if (col.gameObject.layer == 3 && canBeCatch == true) 
         {
-            collision.gameObject.GetComponent<PlayerControls>().CatchBall();
+            col.transform.parent.GetComponent<PlayerControls>().CatchBall();
             gameObject.SetActive(false);
         }
+    }
+
+    IEnumerator CatchDelay() 
+    {
+        canBeCatch = false;
+        GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
+
+        yield return new WaitForSeconds(2f);
+
+        canBeCatch = true;
+        GetComponentInChildren<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
     }
 }

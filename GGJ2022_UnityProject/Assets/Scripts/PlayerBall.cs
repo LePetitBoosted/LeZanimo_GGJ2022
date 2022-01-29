@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class PlayerBall : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject ball;
+    public void LooseBall() 
     {
-        
-    }
+        ball.transform.position = transform.position;
+        ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        Vector2 loseDirection = new Vector2(Random.Range(-0.25f, 0.25f), 1);
+        ball.GetComponent<Rigidbody2D>().AddForce(loseDirection * 10f);
+        ball.SetActive(true);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        gameObject.SetActive(false);
     }
 }

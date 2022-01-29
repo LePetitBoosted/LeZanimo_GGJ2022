@@ -38,6 +38,11 @@ public class DashDetector : MonoBehaviour
 
             otherPlayer.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             otherPlayer.GetComponent<PlayerControls>().hasInput = false;
+            
+            if (otherPlayer.GetComponentInChildren<PlayerBall>() != null)
+            {
+                otherPlayer.GetComponentInChildren<PlayerBall>().LooseBall();
+            }
 
             Vector2 ejectDirection = (otherPlayer.transform.position - transform.position) + new Vector3(0, 0.5f, 0);
             otherPlayer.GetComponent<Rigidbody2D>().AddForce((ejectDirection * ejectForce), ForceMode2D.Impulse);

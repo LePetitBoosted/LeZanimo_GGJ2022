@@ -11,10 +11,6 @@ public class SpontaneousDashMalus : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("Dash auto activé");
-
-   
-
         StartCoroutine(WaitAndDash());
     }
 
@@ -24,16 +20,12 @@ public class SpontaneousDashMalus : MonoBehaviour
 
         yield return new WaitForSeconds(intervalTime);
 
-        //lance le dash                      nécessite de rework un peu le playercontrol
-        //malusManager.targetPlayer.Dash()
-
-        Debug.Log("Dash");
+        malusManager.targetPlayer.GetComponent<PlayerControls>().CalculateDash();
 
         StartCoroutine(WaitAndDash());
     }
 
     private void OnDisable()
     {
-        Debug.Log("Dash Auto fin");
     }
 }

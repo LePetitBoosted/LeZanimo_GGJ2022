@@ -107,7 +107,7 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    IEnumerator Jump() 
+    public IEnumerator Jump() 
     {
         yield return new WaitForSeconds(inputLag);
         rb.velocity = new Vector2(rb.velocity.x, 0f);

@@ -22,4 +22,8 @@ public class DataManager : MonoBehaviour
     public float minEjectForce;
     public float slowMotionDuration;
     public float slowMotionStrenght;
+    public float bigSlowMotionStrenght;
+    public float shockZoomStrenght;
+
+
 }

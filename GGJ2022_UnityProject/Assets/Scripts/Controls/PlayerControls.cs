@@ -4,29 +4,65 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
+    enum PlayerNumber {PlayerOne, PlayerTwo};
+    [Header("Set Player Number")]
+    [SerializeField] PlayerNumber playerNumber;
+    int playerID;
+
+    DataManager dataManager;
+
+    [Header("Player variables, change Data Manager instead!")]
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpForce;
     [SerializeField] float airControl;
     [SerializeField] float dashForce;
     [SerializeField] float dashDuration;
-
     [SerializeField] float dashCooldownTime;
 
 
     Rigidbody2D rb;
+    SpriteRenderer spriteRend;
 
     float currentMoveSpeed;
     float horizontalMove;
+    [Header("Local variables")]
     public bool isGrounded;
     public bool hasInput;
     public bool dashAvailable;
+    [SerializeField] bool isFacingRight;
+    [SerializeField] GameObject normalState;
+    [SerializeField] GameObject dashState;
+    [SerializeField] GameObject playerBall;
     Vector2 rawInputs;
 
     float initialGravityScale;
 
     private void Awake()
     {
+        if (playerNumber == PlayerNumber.PlayerOne) 
+        {
+            playerID = 1;
+        }
+        else 
+        {
+            playerID = 2;
+        }
+
+        dataManager = FindObjectOfType<DataManager>();
         rb = GetComponent<Rigidbody2D>();
+        spriteRend = GetComponentInChildren<SpriteRenderer>();
+
+        rb.mass = dataManager.mass;
+        rb.drag = dataManager.linearDrag;
+        rb.gravityScale = dataManager.gravityScale;
+
+        moveSpeed = dataManager.moveSpeed;
+        jumpForce = dataManager.jumpForce;
+        airControl = dataManager.airControl;
+        dashForce = dataManager.dashForce;
+        dashDuration = dataManager.dashDuration;
+        dashCooldownTime = dataManager.dashCooldownTime;
+        
         currentMoveSpeed = moveSpeed;
         dashAvailable = true;
         initialGravityScale = rb.gravityScale;
@@ -36,21 +72,31 @@ public class PlayerControls : MonoBehaviour
     {
         if (hasInput == true)
         {
-            horizontalMove = Input.GetAxis("Horizontal");
+            horizontalMove = Input.GetAxis("Horizontal P" + playerID);
 
-            if (Input.GetButtonDown("Jump") && isGrounded) 
+            if (horizontalMove > 0 && !isFacingRight)
+            {
+                Flip();
+            }
+
+            if (horizontalMove < 0 && isFacingRight)
+            {
+                Flip();
+            }
+
+            if (Input.GetButtonDown("Jump P" + playerID) && isGrounded) 
             {
                 Jump();
             }
 
-            if (Input.GetButtonDown("Dash") && dashAvailable)
+            if (Input.GetButtonDown("Dash P" + playerID) && dashAvailable)
             {
                 GetInputRaw();
 
                 Vector2 dashDir;
-                if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0 || Mathf.Abs(Input.GetAxis("Vertical")) > 0)
+                if (Mathf.Abs(Input.GetAxis("Horizontal P" + playerID)) > 0 || Mathf.Abs(Input.GetAxis("Vertical P" + playerID)) > 0)
                 {
-                    if (Mathf.Abs(Input.GetAxis("Horizontal")) > Mathf.Abs(Input.GetAxis("Vertical")))
+                    if (Mathf.Abs(Input.GetAxis("Horizontal P" + playerID)) > Mathf.Abs(Input.GetAxis("Vertical P" + playerID)))
                     {
                         dashDir = new Vector2(rawInputs.x, 0);
                     }
@@ -71,7 +117,9 @@ public class PlayerControls : MonoBehaviour
     private void FixedUpdate()
     {
         if (hasInput == true)
+        {
             rb.velocity = new Vector2((horizontalMove * currentMoveSpeed), rb.velocity.y);
+        }
     }
 
     void Jump() 
@@ -82,8 +130,6 @@ public class PlayerControls : MonoBehaviour
 
     IEnumerator Dash(Vector2 dashDirection) 
     {
-        Debug.Log(dashDirection);
-
         StartCoroutine(DashCooldown());
 
         hasInput = false;
@@ -91,11 +137,17 @@ public class PlayerControls : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.AddForce(dashDirection * dashForce, ForceMode2D.Impulse);
 
+        normalState.SetActive(false);
+        dashState.SetActive(true);
+
         yield return new WaitForSeconds(dashDuration);
 
         hasInput = true;
         rb.gravityScale = initialGravityScale;
         rb.velocity = Vector2.zero;
+
+        normalState.SetActive(true);
+        dashState.SetActive(false);
     }
 
     IEnumerator DashCooldown ()
@@ -111,7 +163,7 @@ public class PlayerControls : MonoBehaviour
     {
         if (hasInput == true)
         {
-            if (Input.GetButton("Jump"))
+            if (Input.GetButton("Jump P" + playerID))
             {
                 Jump();
             }
@@ -133,11 +185,11 @@ public class PlayerControls : MonoBehaviour
 
     Vector2 GetInputRaw() 
     {
-        if (Input.GetAxis("Horizontal") != 0)
+        if (Input.GetAxis("Horizontal P" + playerID) != 0)
         {
-            if (Input.GetAxis("Horizontal") > 0)
+            if (Input.GetAxis("Horizontal P" + playerID) > 0)
                 rawInputs.x = 1;
-            if (Input.GetAxis("Horizontal") < 0)
+            if (Input.GetAxis("Horizontal P" + playerID) < 0)
                 rawInputs.x = -1;
         }
         else
@@ -145,11 +197,11 @@ public class PlayerControls : MonoBehaviour
             rawInputs.x = 0;
         }
 
-        if (Input.GetAxis("Vertical") != 0)
+        if (Input.GetAxis("Vertical P" + playerID) != 0)
         {
-            if (Input.GetAxis("Vertical") > 0)
+            if (Input.GetAxis("Vertical P" + playerID) > 0)
                 rawInputs.y = 1;
-            if (Input.GetAxis("Vertical") < 0)
+            if (Input.GetAxis("Vertical P" + playerID) < 0)
                 rawInputs.y = -1;
         }
         else
@@ -158,5 +210,34 @@ public class PlayerControls : MonoBehaviour
         }
 
         return rawInputs;
+    }
+
+    void Flip() 
+    {
+        isFacingRight = !isFacingRight;
+        spriteRend.flipX = !spriteRend.flipX;
+    }
+
+    public void RetrieveInputs(float delay) 
+    { 
+        if (delay != 0) 
+        {
+            StartCoroutine(DelayInputs(delay));
+        }
+        else 
+        {
+            hasInput = true;
+        }
+    }
+
+    IEnumerator DelayInputs(float delay) 
+    {
+        yield return new WaitForSeconds(delay);
+        hasInput = true;
+    }
+
+    public void CatchBall() 
+    {
+        playerBall.SetActive(true);
     }
 }

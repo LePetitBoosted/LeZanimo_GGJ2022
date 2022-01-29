@@ -492,6 +492,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb6e8f545f8fe544ade99159fdd0865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashState: {fileID: 3507574129311323798}
+  ball: {fileID: 0}
 --- !u!1 &5359122958710905369
 GameObject:
   m_ObjectHideFlags: 0

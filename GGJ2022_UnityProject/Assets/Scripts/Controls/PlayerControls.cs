@@ -137,6 +137,17 @@ public class PlayerControls : MonoBehaviour
         StartCoroutine(Dash(dashDir));
     }
 
+    public void RandomDash()
+    {
+        int randomValue = Random.Range(0, 4);
+
+        Vector2[] listOfDir = new Vector2[] {new Vector2(-1, 0), new Vector2(1, 0), new Vector2(0, -1), new Vector2(0,1) };
+
+        Vector2 dashDir = listOfDir[randomValue];
+
+        StartCoroutine(Dash(dashDir));
+    }
+
     IEnumerator Dash(Vector2 dashDirection) 
     {
         yield return new WaitForSeconds(inputLag);

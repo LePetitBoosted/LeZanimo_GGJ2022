@@ -15,7 +15,7 @@ public class RollbackMalus : MonoBehaviour
 
     private void OnDisable()
     {
-        
+        pointsInTime.Clear();
     }
 
     void Rollback() 

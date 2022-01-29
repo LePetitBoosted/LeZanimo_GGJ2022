@@ -92,25 +92,7 @@ public class PlayerControls : MonoBehaviour
 
             if (Input.GetButtonDown("Dash P" + playerID) && dashAvailable)
             {
-                GetInputRaw();
-
-                Vector2 dashDir;
-                if (Mathf.Abs(Input.GetAxis("Horizontal P" + playerID)) > 0 || Mathf.Abs(Input.GetAxis("Vertical P" + playerID)) > 0)
-                {
-                    if (Mathf.Abs(Input.GetAxis("Horizontal P" + playerID)) > Mathf.Abs(Input.GetAxis("Vertical P" + playerID)))
-                    {
-                        dashDir = new Vector2(rawInputs.x, 0);
-                    }
-                    else
-                    {
-                        dashDir = new Vector2(0, rawInputs.y);
-                    }
-                }
-                else
-                {
-                    dashDir = new Vector2(1, 0);
-                }
-                StartCoroutine(Dash(dashDir));
+                CalculateDash();
             }
         }
     }
@@ -127,6 +109,29 @@ public class PlayerControls : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+    }
+
+    public void CalculateDash()
+    {
+        GetInputRaw();
+
+        Vector2 dashDir;
+        if (Mathf.Abs(Input.GetAxis("Horizontal P" + playerID)) > 0 || Mathf.Abs(Input.GetAxis("Vertical P" + playerID)) > 0)
+        {
+            if (Mathf.Abs(Input.GetAxis("Horizontal P" + playerID)) > Mathf.Abs(Input.GetAxis("Vertical P" + playerID)))
+            {
+                dashDir = new Vector2(rawInputs.x, 0);
+            }
+            else
+            {
+                dashDir = new Vector2(0, rawInputs.y);
+            }
+        }
+        else
+        {
+            dashDir = new Vector2(1, 0);
+        }
+        StartCoroutine(Dash(dashDir));
     }
 
     IEnumerator Dash(Vector2 dashDirection) 

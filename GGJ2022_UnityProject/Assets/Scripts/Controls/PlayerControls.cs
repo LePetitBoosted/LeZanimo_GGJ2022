@@ -29,7 +29,9 @@ public class PlayerControls : MonoBehaviour
     public bool isGrounded;
     public bool hasInput;
     public bool dashAvailable;
-    bool isFacingRight = true;
+    [SerializeField] bool isFacingRight;
+    [SerializeField] GameObject normalState;
+    [SerializeField] GameObject dashState;
     Vector2 rawInputs;
 
     float initialGravityScale;
@@ -134,11 +136,17 @@ public class PlayerControls : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.AddForce(dashDirection * dashForce, ForceMode2D.Impulse);
 
+        normalState.SetActive(false);
+        dashState.SetActive(true);
+
         yield return new WaitForSeconds(dashDuration);
 
         hasInput = true;
         rb.gravityScale = initialGravityScale;
         rb.velocity = Vector2.zero;
+
+        normalState.SetActive(true);
+        dashState.SetActive(false);
     }
 
     IEnumerator DashCooldown ()
@@ -207,5 +215,23 @@ public class PlayerControls : MonoBehaviour
     {
         isFacingRight = !isFacingRight;
         spriteRend.flipX = !spriteRend.flipX;
+    }
+
+    public void RetrieveInputs(float delay) 
+    { 
+        if (delay != 0) 
+        {
+            StartCoroutine(DelayInputs(delay));
+        }
+        else 
+        {
+            hasInput = true;
+        }
+    }
+
+    IEnumerator DelayInputs(float delay) 
+    {
+        yield return new WaitForSeconds(delay);
+        hasInput = true;
     }
 }

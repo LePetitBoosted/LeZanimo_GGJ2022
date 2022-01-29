@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
+    enum PlayerNumber {PlayerOne, PlayerTwo};
+    [Header("Set Player Number")]
+    [SerializeField] PlayerNumber playerNumber;
+    int playerID;
+
     DataManager dataManager;
 
     [Header("Player variables, change Data Manager instead!")]
@@ -31,6 +36,15 @@ public class PlayerControls : MonoBehaviour
 
     private void Awake()
     {
+        if (playerNumber == PlayerNumber.PlayerOne) 
+        {
+            playerID = 1;
+        }
+        else 
+        {
+            playerID = 2;
+        }
+
         dataManager = FindObjectOfType<DataManager>();
         rb = GetComponent<Rigidbody2D>();
         spriteRend = GetComponentInChildren<SpriteRenderer>();
@@ -55,7 +69,7 @@ public class PlayerControls : MonoBehaviour
     {
         if (hasInput == true)
         {
-            horizontalMove = Input.GetAxis("Horizontal");
+            horizontalMove = Input.GetAxis("Horizontal P" + playerID);
 
             if (horizontalMove > 0 && !isFacingRight)
             {
@@ -67,19 +81,19 @@ public class PlayerControls : MonoBehaviour
                 Flip();
             }
 
-            if (Input.GetButtonDown("Jump") && isGrounded) 
+            if (Input.GetButtonDown("Jump P" + playerID) && isGrounded) 
             {
                 Jump();
             }
 
-            if (Input.GetButtonDown("Dash") && dashAvailable)
+            if (Input.GetButtonDown("Dash P" + playerID) && dashAvailable)
             {
                 GetInputRaw();
 
                 Vector2 dashDir;
-                if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0 || Mathf.Abs(Input.GetAxis("Vertical")) > 0)
+                if (Mathf.Abs(Input.GetAxis("Horizontal P" + playerID)) > 0 || Mathf.Abs(Input.GetAxis("Vertical P" + playerID)) > 0)
                 {
-                    if (Mathf.Abs(Input.GetAxis("Horizontal")) > Mathf.Abs(Input.GetAxis("Vertical")))
+                    if (Mathf.Abs(Input.GetAxis("Horizontal P" + playerID)) > Mathf.Abs(Input.GetAxis("Vertical P" + playerID)))
                     {
                         dashDir = new Vector2(rawInputs.x, 0);
                     }
@@ -113,8 +127,6 @@ public class PlayerControls : MonoBehaviour
 
     IEnumerator Dash(Vector2 dashDirection) 
     {
-        Debug.Log(dashDirection);
-
         StartCoroutine(DashCooldown());
 
         hasInput = false;
@@ -142,7 +154,7 @@ public class PlayerControls : MonoBehaviour
     {
         if (hasInput == true)
         {
-            if (Input.GetButton("Jump"))
+            if (Input.GetButton("Jump P" + playerID))
             {
                 Jump();
             }
@@ -164,11 +176,11 @@ public class PlayerControls : MonoBehaviour
 
     Vector2 GetInputRaw() 
     {
-        if (Input.GetAxis("Horizontal") != 0)
+        if (Input.GetAxis("Horizontal P" + playerID) != 0)
         {
-            if (Input.GetAxis("Horizontal") > 0)
+            if (Input.GetAxis("Horizontal P" + playerID) > 0)
                 rawInputs.x = 1;
-            if (Input.GetAxis("Horizontal") < 0)
+            if (Input.GetAxis("Horizontal P" + playerID) < 0)
                 rawInputs.x = -1;
         }
         else
@@ -176,11 +188,11 @@ public class PlayerControls : MonoBehaviour
             rawInputs.x = 0;
         }
 
-        if (Input.GetAxis("Vertical") != 0)
+        if (Input.GetAxis("Vertical P" + playerID) != 0)
         {
-            if (Input.GetAxis("Vertical") > 0)
+            if (Input.GetAxis("Vertical P" + playerID) > 0)
                 rawInputs.y = 1;
-            if (Input.GetAxis("Vertical") < 0)
+            if (Input.GetAxis("Vertical P" + playerID) < 0)
                 rawInputs.y = -1;
         }
         else

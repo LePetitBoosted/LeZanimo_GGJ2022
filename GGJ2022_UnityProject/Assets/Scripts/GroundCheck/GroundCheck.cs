@@ -13,9 +13,9 @@ public class GroundCheck : MonoBehaviour
         playerControls = transform.parent.GetComponent<PlayerControls>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == 6 || collision.gameObject.layer == 3) 
+        if((collision.gameObject.layer == 6 || collision.gameObject.layer == 3) && isGrounded == false) 
         {
             isGrounded = true;
             SetIsGrounded();

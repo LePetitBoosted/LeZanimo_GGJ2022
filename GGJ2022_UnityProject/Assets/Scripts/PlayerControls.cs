@@ -9,19 +9,27 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] float airControl;
     [SerializeField] float dashForce;
     [SerializeField] float dashDuration;
-    
+
+    [SerializeField] float dashCooldownTime;
+
+
     Rigidbody2D rb;
 
     float currentMoveSpeed;
     float horizontalMove;
     public bool isGrounded;
     public bool hasInput;
+    public bool dashAvailable;
     Vector2 rawInputs;
+
+    float initialGravityScale;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         currentMoveSpeed = moveSpeed;
+        dashAvailable = true;
+        initialGravityScale = rb.gravityScale;
     }
 
     private void Update()
@@ -35,7 +43,7 @@ public class PlayerControls : MonoBehaviour
                 Jump();
             }
 
-            if (Input.GetButtonDown("Dash"))
+            if (Input.GetButtonDown("Dash") && dashAvailable)
             {
                 GetInputRaw();
 
@@ -76,6 +84,8 @@ public class PlayerControls : MonoBehaviour
     {
         Debug.Log(dashDirection);
 
+        StartCoroutine(DashCooldown());
+
         hasInput = false;
         rb.gravityScale = 0;
         rb.velocity = Vector2.zero;
@@ -84,8 +94,17 @@ public class PlayerControls : MonoBehaviour
         yield return new WaitForSeconds(dashDuration);
 
         hasInput = true;
-        rb.gravityScale = 1;
+        rb.gravityScale = initialGravityScale;
         rb.velocity = Vector2.zero;
+    }
+
+    IEnumerator DashCooldown ()
+    {
+        dashAvailable = false;
+
+        yield return new WaitForSeconds(dashCooldownTime);
+
+        dashAvailable = true;
     }
 
     public void CheckBunnyJump() 

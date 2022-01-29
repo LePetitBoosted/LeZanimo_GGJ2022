@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlayerNumber { PlayerOne, PlayerTwo };
+
 public class PlayerControls : MonoBehaviour
 {
-    enum PlayerNumber {PlayerOne, PlayerTwo};
     [Header("Set Player Number")]
-    [SerializeField] PlayerNumber playerNumber;
+    public PlayerNumber playerNumber;
     int playerID;
 
     DataManager dataManager;

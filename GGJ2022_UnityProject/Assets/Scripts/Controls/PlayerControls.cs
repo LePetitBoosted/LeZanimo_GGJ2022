@@ -107,7 +107,7 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    IEnumerator Jump() 
+    public IEnumerator Jump() 
     {
         yield return new WaitForSeconds(inputLag);
         rb.velocity = new Vector2(rb.velocity.x, 0f);
@@ -134,6 +134,17 @@ public class PlayerControls : MonoBehaviour
         {
             dashDir = new Vector2(1, 0);
         }
+        StartCoroutine(Dash(dashDir));
+    }
+
+    public void RandomDash()
+    {
+        int randomValue = Random.Range(0, 4);
+
+        Vector2[] listOfDir = new Vector2[] {new Vector2(-1, 0), new Vector2(1, 0), new Vector2(0, -1), new Vector2(0,1) };
+
+        Vector2 dashDir = listOfDir[randomValue];
+
         StartCoroutine(Dash(dashDir));
     }
 

@@ -20,7 +20,7 @@ public class SpontaneousDashMalus : MonoBehaviour
 
         yield return new WaitForSeconds(intervalTime);
 
-        malusManager.targetPlayer.GetComponent<PlayerControls>().CalculateDash();
+        malusManager.targetPlayer.GetComponent<PlayerControls>().RandomDash();
 
         StartCoroutine(WaitAndDash());
     }

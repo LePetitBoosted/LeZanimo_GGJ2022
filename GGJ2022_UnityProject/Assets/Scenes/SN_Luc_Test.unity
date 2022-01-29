@@ -481,8 +481,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   malusManager: {fileID: 1980024996}
-  minInterval: 2
-  maxInterval: 4
+  minInterval: 1
+  maxInterval: 3
 --- !u!1 &555824823 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2597524390826027650, guid: 84b21ad6dcbd67b4cb092def38aa7c3b, type: 3}

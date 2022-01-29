@@ -38,6 +38,8 @@ public class PlayerControls : MonoBehaviour
 
     float initialGravityScale;
 
+    public float inputLag = 0;
+
     private void Awake()
     {
         if (playerNumber == PlayerNumber.PlayerOne) 
@@ -87,7 +89,7 @@ public class PlayerControls : MonoBehaviour
 
             if (Input.GetButtonDown("Jump P" + playerID) && isGrounded) 
             {
-                Jump();
+                StartCoroutine(Jump());
             }
 
             if (Input.GetButtonDown("Dash P" + playerID) && dashAvailable)
@@ -105,8 +107,9 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    void Jump() 
+    IEnumerator Jump() 
     {
+        yield return new WaitForSeconds(inputLag);
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
     }
@@ -136,6 +139,8 @@ public class PlayerControls : MonoBehaviour
 
     IEnumerator Dash(Vector2 dashDirection) 
     {
+        yield return new WaitForSeconds(inputLag);
+
         StartCoroutine(DashCooldown());
 
         hasInput = false;
@@ -171,7 +176,7 @@ public class PlayerControls : MonoBehaviour
         {
             if (Input.GetButton("Jump P" + playerID))
             {
-                Jump();
+                StartCoroutine(Jump());
             }
         }
     }

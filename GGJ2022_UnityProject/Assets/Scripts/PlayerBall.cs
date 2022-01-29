@@ -10,6 +10,8 @@ public class PlayerBall : MonoBehaviour
     [SerializeField] GameObject dashState;
     [SerializeField] GameObject ball;
 
+    public bool hasLifeBitchMalus;
+
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -33,6 +35,7 @@ public class PlayerBall : MonoBehaviour
     private void OnEnable()
     {
         malusManager.GiveMalus(transform.parent.gameObject);
+        hasLifeBitchMalus = false;
     }
 
     private void OnDisable()
@@ -44,13 +47,27 @@ public class PlayerBall : MonoBehaviour
     {
         float alpha = Time.deltaTime / gameManager.winDuration;
 
-        if (transform.parent.GetComponent<PlayerControls>().playerNumber == PlayerNumber.PlayerOne && gameManager.playerOneScore < 100f)
+        if (hasLifeBitchMalus == false)
         {
-            gameManager.playerOneScore += alpha * 100;
+            if (transform.parent.GetComponent<PlayerControls>().playerNumber == PlayerNumber.PlayerOne && gameManager.playerOneScore < 100f)
+            {
+                gameManager.playerOneScore += alpha * 100;
+            }
+            else if ((transform.parent.GetComponent<PlayerControls>().playerNumber == PlayerNumber.PlayerTwo && gameManager.playerTwoScore < 100f))
+            {
+                gameManager.playerTwoScore += alpha * 100;
+            }
         }
-        else if ((transform.parent.GetComponent<PlayerControls>().playerNumber == PlayerNumber.PlayerTwo && gameManager.playerTwoScore < 100f))
+        else
         {
-            gameManager.playerTwoScore += alpha * 100;
+            if (transform.parent.GetComponent<PlayerControls>().playerNumber == PlayerNumber.PlayerOne && gameManager.playerOneScore > 0f)
+            {
+                gameManager.playerOneScore -= alpha * 100;
+            }
+            else if ((transform.parent.GetComponent<PlayerControls>().playerNumber == PlayerNumber.PlayerTwo && gameManager.playerTwoScore > 0f))
+            {
+                gameManager.playerTwoScore -= alpha * 100;
+            }
         }
 
         gameManager.UpdateText();

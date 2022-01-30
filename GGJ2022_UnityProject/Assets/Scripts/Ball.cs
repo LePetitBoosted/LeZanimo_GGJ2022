@@ -34,6 +34,7 @@ public class Ball : MonoBehaviour
     {
         if (col.gameObject.layer == 3 && canBeCatch == true) 
         {
+            canBeCatch = false;
             col.transform.parent.GetComponent<PlayerControls>().CatchBall();
             gameObject.SetActive(false);
         }

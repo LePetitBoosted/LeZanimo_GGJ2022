@@ -42,6 +42,8 @@ public class PlayerControls : MonoBehaviour
     public string horizontalStr = "Horizontal P";
     public string verticalStr = "Vertical P";
 
+    public Animator playerAnimator;
+
     private void Awake()
     {
         if (playerNumber == PlayerNumber.PlayerOne) 
@@ -75,6 +77,8 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
+        
+
         if (hasInput == true)
         {
             horizontalMove = Input.GetAxis(horizontalStr + playerID);
@@ -105,6 +109,10 @@ public class PlayerControls : MonoBehaviour
     {
         if (hasInput == true)
         {
+            if (horizontalMove!=0) { playerAnimator.SetBool("IsMoving",true); }
+            else { playerAnimator.SetBool("IsMoving", false); }
+            
+
             rb.velocity = new Vector2((horizontalMove * currentMoveSpeed), rb.velocity.y);
         }
     }
@@ -112,6 +120,7 @@ public class PlayerControls : MonoBehaviour
     public IEnumerator Jump() 
     {
         yield return new WaitForSeconds(inputLag);
+        playerAnimator.SetTrigger("Jumping");
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
     }
@@ -156,15 +165,23 @@ public class PlayerControls : MonoBehaviour
 
         StartCoroutine(DashCooldown());
 
+        playerAnimator.SetFloat("DirY", Input.GetAxis(verticalStr + playerID));
         hasInput = false;
+
+
         rb.gravityScale = 0;
         rb.velocity = Vector2.zero;
         rb.AddForce(dashDirection * dashForce, ForceMode2D.Impulse);
 
-        normalState.SetActive(false);
+        //normalState.SetActive(false);
         dashState.SetActive(true);
 
+        playerAnimator.SetBool("Dashing", true);
+        
+
         yield return new WaitForSeconds(dashDuration);
+
+        playerAnimator.SetBool("Dashing", false);
 
         hasInput = true;
         rb.gravityScale = initialGravityScale;
@@ -258,6 +275,7 @@ public class PlayerControls : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         hasInput = true;
+        //playerAnimator.SetBool("Hit", false);
     }
 
     public void CatchBall() 

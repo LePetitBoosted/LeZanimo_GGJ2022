@@ -18,10 +18,10 @@ public class HellVibrationsMalus : MonoBehaviour
 
     private void OnDisable()
     {
- 
-        vibrationManager.SetVibration(0f, -1f, PlayerNumber.PlayerOne);
-        vibrationManager.SetVibration(0f, -1f, PlayerNumber.PlayerOne);
+        vibrationManager.SetVibration(0f, -1f, target);
 
+        /*vibrationManager.SetVibration(0f, -1f, PlayerNumber.PlayerOne);
+        vibrationManager.SetVibration(0f, -1f, PlayerNumber.PlayerOne);*/
     }
 
     IEnumerator WaitForTargetAndVibrate()
@@ -30,7 +30,7 @@ public class HellVibrationsMalus : MonoBehaviour
 
         target = GetComponentInParent<MalusManager>().targetPlayer;
 
-        vibrationManager.ActiveHellVibrations(target.GetComponent<PlayerControls>().playerNumber);
+        vibrationManager.ActiveHellVibrations(target);
     }
 
 }

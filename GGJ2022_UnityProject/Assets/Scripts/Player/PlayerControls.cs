@@ -49,14 +49,15 @@ public class PlayerControls : MonoBehaviour
 
     private void Awake()
     {
-        if (playerNumber == PlayerNumber.PlayerOne) 
+        StartCoroutine(SetJoystick());
+        /*if (playerNumber == PlayerNumber.PlayerOne) 
         {
             playerID = 1;
         }
         else if (playerNumber == PlayerNumber.PlayerTwo)
         {
             playerID = 2;
-        }
+        }*/
 
         dataManager = FindObjectOfType<DataManager>();
         rb = GetComponent<Rigidbody2D>();
@@ -80,7 +81,7 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
-        if (hasInput == true)
+        if (hasInput == true && playerID != 0)
         {
             horizontalMove = Input.GetAxis(horizontalStr + playerID);
 
@@ -120,8 +121,6 @@ public class PlayerControls : MonoBehaviour
 
     public IEnumerator Jump() 
     {
-        Debug.Log(playerJoystick.joystickName + playerJoystick.joystickIndex);
-
         yield return new WaitForSeconds(inputLag);
         playerSound.clip = soundManager.currentSounds[2];
         playerSound.Play();
@@ -298,5 +297,11 @@ public class PlayerControls : MonoBehaviour
         playerBall.SetActive(true);
         playerSound.clip = soundManager.currentSounds[4];
         playerSound.Play();
+    }
+
+    IEnumerator SetJoystick() 
+    {
+        yield return new WaitForEndOfFrame();
+        playerID = playerJoystick.joystickIndex;
     }
 }

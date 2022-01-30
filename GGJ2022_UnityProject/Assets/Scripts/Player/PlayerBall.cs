@@ -20,16 +20,15 @@ public class PlayerBall : MonoBehaviour
         malusManager = FindObjectOfType<MalusManager>();
         vibrationManager = gameManager.gameObject.GetComponent<VibrationManager>();
 
-
-
-        if (GetComponentInParent<PlayerControls>().playerNumber == PlayerNumber.PlayerOne)
+        vibrationManager.SetVibration(0.4f, 0.2f, transform.parent.gameObject);
+        /*if (GetComponentInParent<PlayerControls>().playerNumber == PlayerNumber.PlayerOne)
         {
             vibrationManager.SetVibration(0.4f, 0.2f, PlayerNumber.PlayerOne);
         }
         else
         {
             vibrationManager.SetVibration(0.4f, 0.2f, PlayerNumber.PlayerTwo);
-        }
+        }*/
     }
 
     public void LooseBall() 

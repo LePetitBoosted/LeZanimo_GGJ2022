@@ -146,33 +146,10 @@ public class DashDetector : MonoBehaviour
 
     void SetVibrationOnSelf(float intensity, float duration)        //A TESTER POUR VERIFIER
     {
-        GameObject goMalusManager = FindObjectOfType<MalusManager>().gameObject;
+        vibrationManager.SetVibration(intensity, duration, transform.parent.gameObject);
+        vibrationManager.SetVibration(intensity, duration, otherPlayer);
 
-        vibrationManager.SetVibration(intensity, duration, PlayerNumber.PlayerOne);
-        vibrationManager.SetVibration(intensity, duration, PlayerNumber.PlayerTwo);
-
-
-        /*
-        if (goMalusManager.GetComponentInChildren<HellVibrationsMalus>() != null)
-        {
-            PlayerNumber targetFromHellVibration = goMalusManager.GetComponent<MalusManager>().targetPlayer.GetComponent<PlayerControls>().playerNumber;
-
-            if (GetComponentInParent<PlayerControls>().playerNumber != targetFromHellVibration)
-            {
-                intensity = Mathf.Clamp01(intensity);
-
-                GamePad.SetVibration(PlayerIndex.One, intensity, intensity);
-                GamePad.SetVibration(PlayerIndex.Two, intensity, intensity);
-                
-            }
-        }
-        else
-        {
-            GamePad.SetVibration(PlayerIndex.One, intensity, intensity);
-            GamePad.SetVibration(PlayerIndex.Two, intensity, intensity);
-        }
-        */
-
-
+        /*vibrationManager.SetVibration(intensity, duration, PlayerNumber.PlayerOne);
+        vibrationManager.SetVibration(intensity, duration, PlayerNumber.PlayerTwo);*/
     }
 }

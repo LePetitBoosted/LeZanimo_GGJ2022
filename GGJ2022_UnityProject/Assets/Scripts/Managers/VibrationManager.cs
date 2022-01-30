@@ -5,22 +5,55 @@ using XInputDotNetPure;
 
 public class VibrationManager : MonoBehaviour
 {
+    JoystickManager joystickManager;
+
+    public bool invertedControllerRumble;
     public HellVibrationsMalus hellVibrations;
 
-    public void SetVibration(float intensity, float duration, PlayerNumber playerNumber)
+    private void Awake()
     {
+        joystickManager = FindObjectOfType<JoystickManager>();
+    }
 
+    public void SetVibration(float intensity, float duration, GameObject targetPlayer)
+    {
         Mathf.Clamp01(intensity);
-        if (!isPlayerInfluencedByHellVibrations(playerNumber))
+        if (!isPlayerInfluencedByHellVibrations(targetPlayer))
         {
+            /*PlayerIndex currentPlayerIndex = PlayerIndex.One;
 
-            if (playerNumber == PlayerNumber.PlayerOne)
+            switch (targetPlayer.GetComponent<PlayerControls>().playerJoystick.joystickIndex) 
             {
-                GamePad.SetVibration(PlayerIndex.One, intensity, intensity);
+                case 1:
+                    currentPlayerIndex = PlayerIndex.One;
+                    break;
+
+                case 2:
+                    currentPlayerIndex = PlayerIndex.Two;
+                    break;
+
+                case 3:
+                    currentPlayerIndex = PlayerIndex.Three;
+                    break;
+
+                case 4:
+                    currentPlayerIndex = PlayerIndex.Four;
+                    break;
+
+                default:
+                    Debug.Log("Not valid joystick index");
+                    break;
             }
-            else if (playerNumber == PlayerNumber.PlayerTwo)
+
+            GamePad.SetVibration(currentPlayerIndex, intensity, intensity);*/
+
+            if (targetPlayer.GetComponent<PlayerControls>().playerNumber == PlayerNumber.PlayerOne)
             {
-                GamePad.SetVibration(PlayerIndex.Two, intensity, intensity);
+                GamePad.SetVibration(joystickManager.connectedPlayerIndex[0], intensity, intensity);
+            }
+            else if (targetPlayer.GetComponent<PlayerControls>().playerNumber == PlayerNumber.PlayerTwo)
+            {
+                GamePad.SetVibration(joystickManager.connectedPlayerIndex[1], intensity, intensity);
             }
             else
             {
@@ -29,20 +62,47 @@ public class VibrationManager : MonoBehaviour
 
             if (duration != -1)
             {
-                StartCoroutine(StopVibrationAfterDelay(duration, playerNumber));
+                StartCoroutine(StopVibrationAfterDelay(duration, targetPlayer));
             }
         }
     }
 
-    public void ActiveHellVibrations(PlayerNumber playerNumber)
+    public void ActiveHellVibrations(GameObject targetPlayer)
     {
-        if (playerNumber == PlayerNumber.PlayerOne)
+        /*PlayerIndex currentPlayerIndex = PlayerIndex.One;
+
+        switch (targetPlayer.GetComponent<PlayerControls>().playerJoystick.joystickIndex)
         {
-            GamePad.SetVibration(PlayerIndex.One, 1f, 1f);
+            case 1:
+                currentPlayerIndex = PlayerIndex.One;
+                break;
+
+            case 2:
+                currentPlayerIndex = PlayerIndex.Two;
+                break;
+
+            case 3:
+                currentPlayerIndex = PlayerIndex.Three;
+                break;
+
+            case 4:
+                currentPlayerIndex = PlayerIndex.Four;
+                break;
+
+            default:
+                Debug.Log("Not valid joystick index");
+                break;
         }
-        else if (playerNumber == PlayerNumber.PlayerTwo)
+
+        GamePad.SetVibration(currentPlayerIndex, 1f, 1f);*/
+
+        if (targetPlayer.GetComponent<PlayerControls>().playerNumber == PlayerNumber.PlayerOne)
         {
-            GamePad.SetVibration(PlayerIndex.Two, 1f, 1f);
+            GamePad.SetVibration(joystickManager.connectedPlayerIndex[0], 1f, 1f);
+        }
+        else if (targetPlayer.GetComponent<PlayerControls>().playerNumber == PlayerNumber.PlayerTwo)
+        {
+            GamePad.SetVibration(joystickManager.connectedPlayerIndex[1], 1f, 1f);
         }
         else
         {
@@ -50,30 +110,59 @@ public class VibrationManager : MonoBehaviour
         }
     }
 
-    IEnumerator StopVibrationAfterDelay(float delay, PlayerNumber playerNum)
+    IEnumerator StopVibrationAfterDelay(float delay, GameObject targetPlayer)
     {
         yield return new WaitForSeconds(delay);
 
-        if (!isPlayerInfluencedByHellVibrations(playerNum))
+        if (!isPlayerInfluencedByHellVibrations(targetPlayer))
         {
-            if (playerNum == PlayerNumber.PlayerOne)
+            /*PlayerIndex currentPlayerIndex = PlayerIndex.One;
+
+            switch (targetPlayer.GetComponent<PlayerControls>().playerJoystick.joystickIndex)
             {
-                GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
+                case 1:
+                    currentPlayerIndex = PlayerIndex.One;
+                    break;
+
+                case 2:
+                    currentPlayerIndex = PlayerIndex.Two;
+                    break;
+
+                case 3:
+                    currentPlayerIndex = PlayerIndex.Three;
+                    break;
+
+                case 4:
+                    currentPlayerIndex = PlayerIndex.Four;
+                    break;
+
+                default:
+                    Debug.Log("Not valid joystick index");
+                    break;
             }
-            else if (playerNum == PlayerNumber.PlayerTwo)
+
+            GamePad.SetVibration(currentPlayerIndex, 0f, 0f);*/
+
+            if (targetPlayer.GetComponent<PlayerControls>().playerNumber == PlayerNumber.PlayerOne)
             {
-                GamePad.SetVibration(PlayerIndex.Two, 0f, 0f);
+                GamePad.SetVibration(joystickManager.connectedPlayerIndex[0], 0f, 0f);
+            }
+            else if (targetPlayer.GetComponent<PlayerControls>().playerNumber == PlayerNumber.PlayerTwo)
+            {
+                GamePad.SetVibration(joystickManager.connectedPlayerIndex[1], 0f, 0f);
             }
         }
     }
 
-    public bool isPlayerInfluencedByHellVibrations(PlayerNumber playerNumber)
+
+
+    public bool isPlayerInfluencedByHellVibrations(GameObject playerTarget)
     {        
         bool output = false;
         
         if (hellVibrations.gameObject.activeSelf == true)
         {
-            if (hellVibrations.target.GetComponent<PlayerControls>().playerNumber == playerNumber)
+            if (hellVibrations.target == playerTarget)
             {
                 output = true;
             }

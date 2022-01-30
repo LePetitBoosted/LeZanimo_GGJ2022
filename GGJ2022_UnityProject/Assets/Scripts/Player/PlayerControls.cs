@@ -9,6 +9,7 @@ public class PlayerControls : MonoBehaviour
     [Header("Set Player Number")]
     public PlayerNumber playerNumber;
     int playerID;
+    public Joystick playerJoystick;
 
     DataManager dataManager;
 
@@ -50,7 +51,7 @@ public class PlayerControls : MonoBehaviour
         {
             playerID = 1;
         }
-        else 
+        else if (playerNumber == PlayerNumber.PlayerTwo)
         {
             playerID = 2;
         }
@@ -77,8 +78,6 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
-        
-
         if (hasInput == true)
         {
             horizontalMove = Input.GetAxis(horizontalStr + playerID);
@@ -119,6 +118,8 @@ public class PlayerControls : MonoBehaviour
 
     public IEnumerator Jump() 
     {
+        Debug.Log(playerJoystick.joystickName + playerJoystick.joystickIndex);
+
         yield return new WaitForSeconds(inputLag);
         playerAnimator.SetTrigger("Jumping");
         rb.velocity = new Vector2(rb.velocity.x, 0f);

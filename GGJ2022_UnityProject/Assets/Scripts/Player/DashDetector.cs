@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XInputDotNetPure;
+
 
 public class DashDetector : MonoBehaviour
 {
     DataManager dataManager;
+    VibrationManager vibrationManager;
     float ejectForce;
 
     GameObject otherPlayer;
@@ -15,6 +16,7 @@ public class DashDetector : MonoBehaviour
     private void Awake()
     {
         dataManager = FindObjectOfType<DataManager>();
+        vibrationManager = FindObjectOfType<VibrationManager>();
         cameraOriginPosition = Camera.main.transform.position;
     }
 
@@ -55,13 +57,14 @@ public class DashDetector : MonoBehaviour
 
             if (otherPlayer.GetComponentInChildren<DashDetector>() == null)
             {
-                SetVibrationOnSelf(0.4f);
+                SetVibrationOnSelf(0.4f, dataManager.slowMotionDuration);
+
                 Time.timeScale = dataManager.slowMotionStrenght;
                 StartCoroutine(StopSlowMotion());
             }
             else 
             {
-                SetVibrationOnSelf(0.6f);
+                SetVibrationOnSelf(0.6f, dataManager.slowMotionDuration);
                 Time.timeScale = dataManager.bigSlowMotionStrenght;
                 StartCoroutine(BigSlowMotionWithZoom());
             }
@@ -73,7 +76,6 @@ public class DashDetector : MonoBehaviour
     IEnumerator StopSlowMotion() 
     {
         yield return new WaitForSeconds(dataManager.slowMotionDuration * Time.timeScale);
-        SetVibrationOnSelf(0f);
         Time.timeScale = 1f;
     }
 
@@ -116,7 +118,6 @@ public class DashDetector : MonoBehaviour
         }
 
         yield return new WaitForSeconds(dataManager.slowMotionDuration * Time.timeScale);
-        SetVibrationOnSelf(0f);
 
 
         for (int i = 0; i <= 10; i++)
@@ -135,11 +136,15 @@ public class DashDetector : MonoBehaviour
 
     }
 
-    void SetVibrationOnSelf(float intensity)        //A TESTER POUR VERIFIER
+    void SetVibrationOnSelf(float intensity, float duration)        //A TESTER POUR VERIFIER
     {
         GameObject goMalusManager = FindObjectOfType<MalusManager>().gameObject;
 
+        vibrationManager.SetVibration(intensity, duration, PlayerNumber.PlayerOne);
+        vibrationManager.SetVibration(intensity, duration, PlayerNumber.PlayerTwo);
 
+
+        /*
         if (goMalusManager.GetComponentInChildren<HellVibrationsMalus>() != null)
         {
             PlayerNumber targetFromHellVibration = goMalusManager.GetComponent<MalusManager>().targetPlayer.GetComponent<PlayerControls>().playerNumber;
@@ -148,17 +153,18 @@ public class DashDetector : MonoBehaviour
             {
                 intensity = Mathf.Clamp01(intensity);
 
-                if (GetComponentInParent<PlayerControls>().playerNumber == PlayerNumber.PlayerOne)
-                {
-                    GamePad.SetVibration(PlayerIndex.One, intensity, intensity);
-                }
-                else
-                {
-                    GamePad.SetVibration(PlayerIndex.Two, intensity, intensity);
-                }
+                GamePad.SetVibration(PlayerIndex.One, intensity, intensity);
+                GamePad.SetVibration(PlayerIndex.Two, intensity, intensity);
+                
             }
         }
-        
-       
+        else
+        {
+            GamePad.SetVibration(PlayerIndex.One, intensity, intensity);
+            GamePad.SetVibration(PlayerIndex.Two, intensity, intensity);
+        }
+        */
+
+
     }
 }

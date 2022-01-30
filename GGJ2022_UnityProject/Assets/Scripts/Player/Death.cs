@@ -29,6 +29,7 @@ public class Death : MonoBehaviour
         isDead = true;
 
         GetComponent<PlayerControls>().hasInput = false;
+        GetComponent<PlayerControls>().StopAllCoroutines();
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Rigidbody2D>().gravityScale = 0;
         normalState.GetComponent<BoxCollider2D>().enabled = false;
@@ -73,6 +74,7 @@ public class Death : MonoBehaviour
         GetComponent<Rigidbody2D>().gravityScale = dataManager.gravityScale;
         GetComponentInChildren<Animator>().SetTrigger("Reset");
         GetComponent<PlayerControls>().RetrieveInputs(0f);
+        GetComponent<PlayerControls>().dashAvailable = true;
 
         isDead = false;
     }

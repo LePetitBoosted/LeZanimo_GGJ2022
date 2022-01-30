@@ -6,11 +6,6 @@ public class PermanentJumpMalus : MonoBehaviour
 {
     [SerializeField] MalusManager malusManager;
 
-    private void OnEnable()
-    {
-        Debug.LogWarning("Malus");
-    }
-
     private void Update()
     {
         if (malusManager.targetPlayer.GetComponent<PlayerControls>().isGrounded)
@@ -19,10 +14,4 @@ public class PermanentJumpMalus : MonoBehaviour
             
         }
     }
-
-    private void OnDisable()
-    {
-        Debug.LogWarning("Malus ended");
-    }
-
 }

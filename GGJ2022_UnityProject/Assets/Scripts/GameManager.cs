@@ -41,13 +41,13 @@ public class GameManager : MonoBehaviour
         playerTwoFillBar.fillAmount = playerTwoScore / 100;
     }
 
-    void CheckForWin() 
+    public void CheckForWin() 
     {
-        if(playerOneScore == 100) 
+        if(playerOneScore >= 100) 
         {
             StartCoroutine(EndGame(PlayerNumber.PlayerOne));
         }
-        else if(playerTwoScore == 100) 
+        else if(playerTwoScore >= 100) 
         {
             StartCoroutine(EndGame(PlayerNumber.PlayerTwo));
         }
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator EndGame(PlayerNumber winner) 
     {
-        Time.timeScale = 0.3f;
+        Time.timeScale = 0.5f;
         dataSaver.winner = winner;
 
         yield return new WaitForSeconds(1f);

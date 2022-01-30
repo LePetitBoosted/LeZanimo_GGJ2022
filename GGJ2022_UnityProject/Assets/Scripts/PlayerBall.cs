@@ -98,5 +98,6 @@ public class PlayerBall : MonoBehaviour
         }
 
         gameManager.UpdateUI();
+        gameManager.CheckForWin();
     }
 }

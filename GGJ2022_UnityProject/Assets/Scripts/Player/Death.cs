@@ -11,9 +11,12 @@ public class Death : MonoBehaviour
     [SerializeField] GameObject normalState;
     [SerializeField] GameObject dashState;
 
+    Animator playerAnimator;
+
     private void Awake()
     {
         dataManager = FindObjectOfType<DataManager>();
+        playerAnimator = GetComponentInChildren<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -42,7 +45,7 @@ public class Death : MonoBehaviour
         {
             GetComponentInChildren<PlayerBall>().LooseBallOnDeath();
         }
-        GetComponentInChildren<Animator>().SetTrigger("Death");
+        playerAnimator.SetTrigger("Death");
 
         StartCoroutine(DelayDepop());
     }
@@ -50,7 +53,7 @@ public class Death : MonoBehaviour
     IEnumerator DelayDepop() 
     {
         yield return new WaitForSeconds(dataManager.delayToDepop);
-        normalState.SetActive(false);
+        normalState.GetComponentInChildren<SpriteRenderer>().enabled = false;
 
         yield return new WaitForSeconds(dataManager.delayToRespawn);
         Respawn();
@@ -60,9 +63,11 @@ public class Death : MonoBehaviour
     {
         int randomIndex = Random.Range(0, dataManager.spawnPoints.Count);
         transform.position = dataManager.spawnPoints[randomIndex].position;
-        
-        normalState.SetActive(true);
-        GetComponentInChildren<Animator>().SetTrigger("Respawn");
+
+
+        normalState.GetComponentInChildren<SpriteRenderer>().enabled = true;
+        playerAnimator.SetTrigger("Respawn");
+        playerAnimator.SetBool("Dashing", false); //pour éviter de respawn en dash
 
         StartCoroutine(RetrieveInputs());
     }
@@ -72,7 +77,7 @@ public class Death : MonoBehaviour
         yield return new WaitForSeconds(dataManager.delayForInputs);
         normalState.GetComponent<BoxCollider2D>().enabled = true;
         GetComponent<Rigidbody2D>().gravityScale = dataManager.gravityScale;
-        GetComponentInChildren<Animator>().SetTrigger("Reset");
+        playerAnimator.SetTrigger("Reset");
         GetComponent<PlayerControls>().RetrieveInputs(0f);
         GetComponent<PlayerControls>().dashAvailable = true;
 

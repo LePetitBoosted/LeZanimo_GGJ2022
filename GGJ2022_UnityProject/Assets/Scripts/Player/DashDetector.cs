@@ -31,6 +31,9 @@ public class DashDetector : MonoBehaviour
     private void OnDisable()
     {
         Time.timeScale = 1f;
+        Camera.main.orthographicSize = 10f;
+        Camera.main.transform.position = cameraOriginPosition;
+
     }
 
     private void Update()

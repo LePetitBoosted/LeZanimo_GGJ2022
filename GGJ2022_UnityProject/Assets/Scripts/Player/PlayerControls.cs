@@ -143,7 +143,14 @@ public class PlayerControls : MonoBehaviour
         }
         else
         {
-            dashDir = new Vector2(1, 0);
+            if (isFacingRight == true)
+            {
+                dashDir = new Vector2(1, 0);
+            }
+            else 
+            {
+                dashDir = new Vector2(-1, 0);
+            }
         }
         StartCoroutine(Dash(dashDir));
     }

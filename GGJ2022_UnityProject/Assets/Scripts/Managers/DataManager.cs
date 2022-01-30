@@ -25,5 +25,9 @@ public class DataManager : MonoBehaviour
     public float bigSlowMotionStrenght;
     public float shockZoomStrenght;
 
-
+    [Header("Death")]
+    public float delayToDepop;
+    public float delayToRespawn;
+    public float delayForInputs;
+    public List<Transform> spawnPoints = new List<Transform>();
 }

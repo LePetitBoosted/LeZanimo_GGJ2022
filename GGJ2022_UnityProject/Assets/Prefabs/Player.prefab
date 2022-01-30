@@ -158,7 +158,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a1f73947381246e419afa8b674d9ac10, type: 3}
+  m_Sprite: {fileID: 1481110808, guid: 0cd117976a82d0048825655c7d3fa5b1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -271,6 +271,7 @@ GameObject:
   - component: {fileID: 2618938977890223207}
   - component: {fileID: 2618938977890223226}
   - component: {fileID: 2618938977890223205}
+  - component: {fileID: 8795421391315944911}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -349,6 +350,21 @@ MonoBehaviour:
   horizontalStr: Horizontal P
   verticalStr: Vertical P
   playerAnimator: {fileID: 5519887591452337180}
+--- !u!114 &8795421391315944911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2618938977890223206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e41e9695785990342a3f1de163c80272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalState: {fileID: 5359122958710905369}
+  dashState: {fileID: 3507574129311323798}
+  spawnPoints: []
 --- !u!1 &3164178981288788993
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,7 +438,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a1f73947381246e419afa8b674d9ac10, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0706cf6305ec4de469f8551a582c6dc8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

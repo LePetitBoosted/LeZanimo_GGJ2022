@@ -14,7 +14,7 @@ PrefabInstance:
     - target: {fileID: 2618938977355772796, guid: 2d423561630e2804489abb4ba5760f75, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 90a3b3bf8fabfd74bba6337df3b3135b, type: 3}
+      objectReference: {fileID: 1481110808, guid: 0cd117976a82d0048825655c7d3fa5b1, type: 3}
     - target: {fileID: 2618938977890223205, guid: 2d423561630e2804489abb4ba5760f75, type: 3}
       propertyPath: playerNumber
       value: 1
@@ -74,6 +74,6 @@ PrefabInstance:
     - target: {fileID: 7144023536452007714, guid: 2d423561630e2804489abb4ba5760f75, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 90a3b3bf8fabfd74bba6337df3b3135b, type: 3}
+      objectReference: {fileID: 21300000, guid: 0706cf6305ec4de469f8551a582c6dc8, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d423561630e2804489abb4ba5760f75, type: 3}

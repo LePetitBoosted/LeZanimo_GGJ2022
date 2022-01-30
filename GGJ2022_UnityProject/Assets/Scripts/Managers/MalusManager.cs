@@ -43,6 +43,8 @@ public class MalusManager : MonoBehaviour
         possibleMalus.Clear();
         ChooseMalus();
 
+        timeElapsed = 0f;
+
         DisplayMalus();
     }
 
@@ -93,7 +95,7 @@ public class MalusManager : MonoBehaviour
             currentMalusUI.SetActive(false);
         }
         shouldLerp = false;
-        timeElapsed = 0;
+        timeElapsed = 0f;
         StopCoroutine(WaitForUI());
     }
 

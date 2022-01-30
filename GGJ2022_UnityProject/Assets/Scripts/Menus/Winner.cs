@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
+using UnityEngine.UI;
 
 public class Winner : MonoBehaviour
 {
     DataSaver dataSaver;
 
-    [SerializeField] TMP_Text winnerText;
+    [SerializeField] Image winnerImage;
+    [SerializeField] Sprite playerOneWinningScreen;
+    [SerializeField] Sprite playerTwoWinningScreen;
 
     private void Awake()
     {
@@ -16,24 +18,30 @@ public class Winner : MonoBehaviour
         {
             dataSaver = FindObjectOfType<DataSaver>();
         }
-        SetText();
+        SetWinningScreen();
     }
 
-    void SetText() 
+    void SetWinningScreen() 
     {
         if(dataSaver.winner == PlayerNumber.PlayerOne) 
         {
-            winnerText.text = "RED PLAYER WINS";
-            winnerText.color = Color.red;
+            winnerImage.sprite = playerOneWinningScreen;
         }
         else if (dataSaver.winner == PlayerNumber.PlayerTwo)
         {
-            winnerText.text = "GREEN PLAYER WINS";
-            winnerText.color = Color.green;
+            winnerImage.sprite = playerTwoWinningScreen;
         }
     }
 
-    public void MainMenu() 
+    private void Update()
+    {
+        if (Input.GetButtonDown("Pause")) 
+        {
+            MainMenu();
+        }
+    }
+
+    void MainMenu() 
     {
         SceneManager.LoadScene("SN_Menu");
     }

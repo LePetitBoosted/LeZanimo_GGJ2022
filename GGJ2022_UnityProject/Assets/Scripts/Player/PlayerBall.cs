@@ -10,6 +10,7 @@ public class PlayerBall : MonoBehaviour
 
     [SerializeField] GameObject dashState;
     [SerializeField] GameObject ball;
+    [SerializeField] GameObject ballUI;
 
     public bool hasLifeBitchMalus;
 
@@ -45,14 +46,30 @@ public class PlayerBall : MonoBehaviour
         }
     }
 
+    public void LooseBallOnDeath()
+    {
+        ball.transform.position = transform.position;
+        ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        Vector2 loseDirection = new Vector2(Random.Range(-0.25f, 0.25f), 1);
+        ball.GetComponent<Rigidbody2D>().AddForce(loseDirection * 10f);
+        ball.SetActive(true);
+
+        gameObject.SetActive(false);
+    }
+
     private void OnEnable()
     {
+        ballUI.SetActive(true);
         malusManager.GiveMalus(transform.parent.gameObject);
         hasLifeBitchMalus = false;
     }
 
     private void OnDisable()
     {
+        if (ballUI != null)
+        {
+            ballUI.SetActive(false);
+        }
         malusManager.EndMalus();
     }
 

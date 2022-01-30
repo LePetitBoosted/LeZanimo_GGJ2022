@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
 public class PlayerBall : MonoBehaviour
 {
@@ -16,6 +17,24 @@ public class PlayerBall : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         malusManager = FindObjectOfType<MalusManager>();
+
+        StartCoroutine(VibrationsOnSelf());
+    }
+
+    IEnumerator VibrationsOnSelf()
+    {
+        if (GetComponentInParent<PlayerControls>().playerNumber == PlayerNumber.PlayerOne)
+        {
+            GamePad.SetVibration(PlayerIndex.One, 0.4f, 0.4f);
+            yield return new WaitForSeconds(0.2f);
+            GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
+        }
+        else
+        {
+            GamePad.SetVibration(PlayerIndex.Two, 0.4f, 0.4f);
+            yield return new WaitForSeconds(0.2f);
+            GamePad.SetVibration(PlayerIndex.Two, 0f, 0f);
+        }
     }
 
     public void LooseBall() 

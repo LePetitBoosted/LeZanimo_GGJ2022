@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1574532732859686895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2618938977890223207}
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: fa01b45a09bd7af4da895899898d373b, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 738eaee3f845676489a23f5e552d2ba7, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -325,6 +325,8 @@ MonoBehaviour:
   dashState: {fileID: 3507574129311323798}
   playerBall: {fileID: 3553843822720304452}
   inputLag: 0
+  horizontalStr: Horizontal P
+  verticalStr: Vertical P
 --- !u!1 &3164178981288788993
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,6 +582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashState: {fileID: 3507574129311323798}
   ball: {fileID: 0}
+  hasLifeBitchMalus: 0
 --- !u!1 &5359122958710905369
 GameObject:
   m_ObjectHideFlags: 0

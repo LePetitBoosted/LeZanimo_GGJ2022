@@ -70,6 +70,6 @@ public class PlayerBall : MonoBehaviour
             }
         }
 
-        gameManager.UpdateText();
+        gameManager.UpdateUI();
     }
 }

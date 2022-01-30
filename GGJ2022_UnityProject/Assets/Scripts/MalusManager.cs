@@ -10,6 +10,7 @@ public class MalusManager : MonoBehaviour
     GameManager gameManager;
 
     [SerializeField] List<GameObject> malusList = new List<GameObject>();
+    List<GameObject> possibleMalus = new List<GameObject>();
     int currentMalusIndex;
 
     public GameObject targetPlayer;
@@ -22,6 +23,7 @@ public class MalusManager : MonoBehaviour
     public void GiveMalus(GameObject player) 
     {
         targetPlayer = player;
+        possibleMalus.Clear();
         ChooseMalus();
     }
 
@@ -38,8 +40,7 @@ public class MalusManager : MonoBehaviour
             {
                 targetLevel = gameManager.playerTwoScore;
             }
-
-            List<GameObject> possibleMalus = new List<GameObject>();
+            Debug.Log(targetLevel);
             foreach(GameObject malus in malusList) 
             {
                 if (Enumerable.Range(Mathf.RoundToInt(malus.GetComponent<MalusBase>().malusLevel.x), Mathf.RoundToInt(malus.GetComponent<MalusBase>().malusLevel.y)).Contains(Mathf.RoundToInt(targetLevel))) 
@@ -60,6 +61,13 @@ public class MalusManager : MonoBehaviour
 
     public void EndMalus() 
     {
-        malusList[currentMalusIndex].SetActive(false);
+        if (allStar == false)
+        {
+            possibleMalus[currentMalusIndex].SetActive(false);
+        }
+        else 
+        {
+            malusList[currentMalusIndex].SetActive(false);
+        }
     }
 }

@@ -51,7 +51,7 @@ public class DashDetector : MonoBehaviour
             Vector2 ejectDirection = (otherPlayer.transform.position - transform.position) + new Vector3(0, 0.5f, 0);
             otherPlayer.GetComponent<Rigidbody2D>().AddForce((ejectDirection * ejectForce), ForceMode2D.Impulse);
 
-            if (otherPlayer.GetComponentInChildren<PlayerBall>() != null)
+            if (otherPlayer.GetComponentInChildren<DashDetector>() == null)
             {
                 Time.timeScale = dataManager.slowMotionStrenght;
                 StartCoroutine(StopSlowMotion());

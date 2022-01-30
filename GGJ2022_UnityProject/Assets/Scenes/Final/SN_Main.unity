@@ -3165,6 +3165,8 @@ MonoBehaviour:
   minEjectForce: 500
   slowMotionDuration: 0.3
   slowMotionStrenght: 0.1
+  bigSlowMotionStrenght: 0.08
+  shockZoomStrenght: 3
 --- !u!1 &1948189897
 GameObject:
   m_ObjectHideFlags: 0

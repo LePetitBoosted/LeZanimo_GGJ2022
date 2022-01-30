@@ -5,30 +5,32 @@ using XInputDotNetPure;
 
 public class HellVibrationsMalus : MonoBehaviour
 {
-    GameObject target;
+    public GameObject target;
+    public VibrationManager vibrationManager;
+
 
     private void OnEnable()
     {
-        StartCoroutine(SetVibrations());
+        //vibrationManager.SetVibration(1f, -1f, target.GetComponent<PlayerControls>().playerNumber);
+
+        StartCoroutine(WaitForTargetAndVibrate());
     }
 
     private void OnDisable()
     {
-        GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
-        GamePad.SetVibration(PlayerIndex.Two, 0f, 0f);
+ 
+        vibrationManager.SetVibration(0f, -1f, PlayerNumber.PlayerOne);
+        vibrationManager.SetVibration(0f, -1f, PlayerNumber.PlayerOne);
+
     }
 
-    IEnumerator SetVibrations()
+    IEnumerator WaitForTargetAndVibrate()
     {
         yield return new WaitForEndOfFrame();
-        target = transform.parent.GetComponent<MalusManager>().targetPlayer;
-        if(target.GetComponent<PlayerControls>().playerNumber == PlayerNumber.PlayerOne) 
-        {
-            GamePad.SetVibration(PlayerIndex.Two, 1f, 1f);
-        }
-        else 
-        {
-            GamePad.SetVibration(PlayerIndex.One, 1f, 1f);
-        }
+
+        target = GetComponentInParent<MalusManager>().targetPlayer;
+
+        vibrationManager.ActiveHellVibrations(target.GetComponent<PlayerControls>().playerNumber);
     }
+
 }

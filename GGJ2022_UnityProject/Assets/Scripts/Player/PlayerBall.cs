@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XInputDotNetPure;
 
 public class PlayerBall : MonoBehaviour
 {
     GameManager gameManager;
     MalusManager malusManager;
+    VibrationManager vibrationManager;
 
     [SerializeField] GameObject dashState;
     [SerializeField] GameObject ball;
@@ -17,31 +17,17 @@ public class PlayerBall : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         malusManager = FindObjectOfType<MalusManager>();
+        vibrationManager = gameManager.gameObject.GetComponent<VibrationManager>();
 
-        StartCoroutine(VibrationsOnSelf());
-    }
 
-    IEnumerator VibrationsOnSelf()
-    {
+
         if (GetComponentInParent<PlayerControls>().playerNumber == PlayerNumber.PlayerOne)
         {
-            GamePad.SetVibration(PlayerIndex.One, 0.4f, 0.4f);
-            yield return new WaitForSeconds(0.2f);
-
-            if (FindObjectOfType<HellVibrationsMalus>() != null)
-            {
-                GamePad.SetVibration(PlayerIndex.One, 0f, 0f);
-            }
+            vibrationManager.SetVibration(0.4f, 0.2f, PlayerNumber.PlayerOne);
         }
         else
         {
-            GamePad.SetVibration(PlayerIndex.Two, 0.4f, 0.4f);
-            yield return new WaitForSeconds(0.2f);
-
-            if (FindObjectOfType<HellVibrationsMalus>() != null)
-            {
-                GamePad.SetVibration(PlayerIndex.Two, 0f, 0f);
-            }
+            vibrationManager.SetVibration(0.4f, 0.2f, PlayerNumber.PlayerTwo);
         }
     }
 

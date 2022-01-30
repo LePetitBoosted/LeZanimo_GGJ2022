@@ -10,6 +10,7 @@ public class PlayerBall : MonoBehaviour
 
     [SerializeField] GameObject dashState;
     [SerializeField] GameObject ball;
+    [SerializeField] GameObject ballUI;
 
     public bool hasLifeBitchMalus;
 
@@ -58,12 +59,14 @@ public class PlayerBall : MonoBehaviour
 
     private void OnEnable()
     {
+        ballUI.SetActive(true);
         malusManager.GiveMalus(transform.parent.gameObject);
         hasLifeBitchMalus = false;
     }
 
     private void OnDisable()
     {
+        ballUI.SetActive(false);
         malusManager.EndMalus();
     }
 

@@ -369,6 +369,7 @@ MonoBehaviour:
   dashState: {fileID: 3507574129311323798}
   soundManager: {fileID: 0}
   playerSound: {fileID: 2760773423501850477}
+  respawnSound: {fileID: 0}
 --- !u!82 &2760773423501850477
 AudioSource:
   m_ObjectHideFlags: 0

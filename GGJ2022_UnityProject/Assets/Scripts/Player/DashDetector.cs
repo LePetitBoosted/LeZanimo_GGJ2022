@@ -77,9 +77,6 @@ public class DashDetector : MonoBehaviour
                 StartCoroutine(BigSlowMotionWithZoom());
             }
 
-            //otherPlayer.GetComponent<PlayerControls>().playerAnimator.SetBool("Hit", true);
-
-
             otherPlayer.GetComponent<PlayerControls>().RetrieveInputs(.5f);
         }
     }

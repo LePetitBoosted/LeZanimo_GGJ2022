@@ -50,14 +50,6 @@ public class PlayerControls : MonoBehaviour
     private void Awake()
     {
         StartCoroutine(SetJoystick());
-        /*if (playerNumber == PlayerNumber.PlayerOne) 
-        {
-            playerID = 1;
-        }
-        else if (playerNumber == PlayerNumber.PlayerTwo)
-        {
-            playerID = 2;
-        }*/
 
         dataManager = FindObjectOfType<DataManager>();
         rb = GetComponent<Rigidbody2D>();
@@ -187,8 +179,16 @@ public class PlayerControls : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.AddForce(dashDirection * dashForce, ForceMode2D.Impulse);
 
-        //normalState.SetActive(false);
         dashState.SetActive(true);
+        if(dashDirection.x != 0) 
+        {
+            dashState.GetComponent<BoxCollider2D>().size = new Vector2(1.4f, 0.7f);
+        }
+        else 
+        {
+            dashState.GetComponent<BoxCollider2D>().size = new Vector2(0.7f, 1.4f);
+        }
+        normalState.GetComponent<BoxCollider2D>().enabled = false;
 
         playerAnimator.SetBool("Dashing", true);
         
@@ -201,7 +201,7 @@ public class PlayerControls : MonoBehaviour
         rb.gravityScale = initialGravityScale;
         rb.velocity = Vector2.zero;
 
-        normalState.SetActive(true);
+        normalState.GetComponent<BoxCollider2D>().enabled = true;
         dashState.SetActive(false);
     }
 

@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject elements;
     [SerializeField] GameObject playerOne;
     [SerializeField] GameObject playerTwo;
+    [SerializeField] VibrationManager vibrationManager;
 
     bool isPaused;
 
@@ -54,5 +55,10 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("SN_Menu");
+    }
+
+    public void rumbleToggle(bool isOn) 
+    {
+        vibrationManager.invertedControllerRumble = isOn;
     }
 }

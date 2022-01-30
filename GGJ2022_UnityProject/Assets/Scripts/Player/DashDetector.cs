@@ -110,7 +110,6 @@ public class DashDetector : MonoBehaviour
             focusPoint.y = -10 * (dataManager.shockZoomStrenght / 10f);
         }
 
-
         //Mathf.Clamp(focusPoint.x, -18 * (dataManager.shockZoomStrenght / 10f), 18 * (dataManager.shockZoomStrenght / 10f));
         //Mathf.Clamp(focusPoint.y, -10 * (dataManager.shockZoomStrenght / 10f), 10 * (dataManager.shockZoomStrenght / 10f));
 
@@ -144,12 +143,9 @@ public class DashDetector : MonoBehaviour
 
     }
 
-    void SetVibrationOnSelf(float intensity, float duration)        //A TESTER POUR VERIFIER
+    void SetVibrationOnSelf(float intensity, float duration)
     {
         vibrationManager.SetVibration(intensity, duration, transform.parent.gameObject);
         vibrationManager.SetVibration(intensity, duration, otherPlayer);
-
-        /*vibrationManager.SetVibration(intensity, duration, PlayerNumber.PlayerOne);
-        vibrationManager.SetVibration(intensity, duration, PlayerNumber.PlayerTwo);*/
     }
 }

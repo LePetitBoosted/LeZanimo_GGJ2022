@@ -11,17 +11,12 @@ public class HellVibrationsMalus : MonoBehaviour
 
     private void OnEnable()
     {
-        //vibrationManager.SetVibration(1f, -1f, target.GetComponent<PlayerControls>().playerNumber);
-
         StartCoroutine(WaitForTargetAndVibrate());
     }
 
     private void OnDisable()
     {
         vibrationManager.SetVibration(0f, -1f, target);
-
-        /*vibrationManager.SetVibration(0f, -1f, PlayerNumber.PlayerOne);
-        vibrationManager.SetVibration(0f, -1f, PlayerNumber.PlayerOne);*/
     }
 
     IEnumerator WaitForTargetAndVibrate()

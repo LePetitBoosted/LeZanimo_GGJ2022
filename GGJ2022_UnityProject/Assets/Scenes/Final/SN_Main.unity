@@ -2779,6 +2779,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087987495}
   m_CullTransparentMesh: 1
+--- !u!1 &1110305716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1110305717}
+  m_Layer: 0
+  m_Name: _SOUND
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1110305717
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110305716}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.2576371, y: -9.062249, z: -1.8287536}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1806955911}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1144626477
 GameObject:
   m_ObjectHideFlags: 0
@@ -4785,6 +4817,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hellVibrations: {fileID: 1370125147}
+--- !u!1 &1806955910
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1806955911}
+  - component: {fileID: 1806955912}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1806955911
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806955910}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1110305717}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1806955912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806955910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5258173333f94cc4ab3e95038af0c773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windowsSounds:
+  - {fileID: 8300000, guid: 90910d4eb64341045a50d65cdf6b0fe6, type: 3}
+  - {fileID: 8300000, guid: d8aeb414965ffeb4286715227148ef2d, type: 3}
+  - {fileID: 8300000, guid: 18e78731dc5422349a5e6f9db425552a, type: 3}
+  - {fileID: 8300000, guid: ae3218bb1208f6d4782728ee3e098572, type: 3}
+  - {fileID: 8300000, guid: b7937bdde06381e4f845ed61e7359b81, type: 3}
+  - {fileID: 8300000, guid: c2a38094dfb9f004b8487f7c24520196, type: 3}
+  secretSounds:
+  - {fileID: 8300000, guid: 038a6aa1f945fbd449ac94e2c0b4b9a1, type: 3}
+  - {fileID: 8300000, guid: ebba94be246077b41abe947c01f3260d, type: 3}
+  - {fileID: 8300000, guid: 599af25eda592e44f90f619183290de4, type: 3}
+  - {fileID: 8300000, guid: f4db6dcdf660e1b4e89ca520270cb3cd, type: 3}
+  - {fileID: 8300000, guid: 0ade715f7bea5174d8e32394168651f7, type: 3}
 --- !u!1 &1812045611
 GameObject:
   m_ObjectHideFlags: 0

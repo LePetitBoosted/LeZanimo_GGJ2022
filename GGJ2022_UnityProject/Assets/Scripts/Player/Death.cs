@@ -13,6 +13,10 @@ public class Death : MonoBehaviour
 
     Animator playerAnimator;
 
+    public SoundManager soundManager;
+    public AudioSource playerSound;
+    public AudioSource respawnSound;
+
     private void Awake()
     {
         dataManager = FindObjectOfType<DataManager>();
@@ -30,6 +34,8 @@ public class Death : MonoBehaviour
     void Die() 
     {
         isDead = true;
+        playerSound.clip = soundManager.currentSounds[3];
+        playerSound.Play();
 
         GetComponent<PlayerControls>().hasInput = false;
         GetComponent<PlayerControls>().StopAllCoroutines();
@@ -68,6 +74,8 @@ public class Death : MonoBehaviour
         normalState.GetComponentInChildren<SpriteRenderer>().enabled = true;
         playerAnimator.SetTrigger("Respawn");
         playerAnimator.SetBool("Dashing", false); //pour éviter de respawn en dash
+        respawnSound.clip = soundManager.currentSounds[5];
+        respawnSound.Play();
 
         StartCoroutine(RetrieveInputs());
     }

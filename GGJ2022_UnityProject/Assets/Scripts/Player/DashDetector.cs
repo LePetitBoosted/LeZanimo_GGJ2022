@@ -13,6 +13,9 @@ public class DashDetector : MonoBehaviour
 
     Vector3 cameraOriginPosition;
 
+    public SoundManager soundManager;
+    public AudioSource playerSound;
+
     private void Awake()
     {
         dataManager = FindObjectOfType<DataManager>();
@@ -42,6 +45,8 @@ public class DashDetector : MonoBehaviour
         if (collision.gameObject.layer == 3) 
         {
             otherPlayer = collision.gameObject;
+            playerSound.clip = soundManager.currentSounds[1];
+            playerSound.Play();
 
             otherPlayer.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             otherPlayer.GetComponent<PlayerControls>().hasInput = false;

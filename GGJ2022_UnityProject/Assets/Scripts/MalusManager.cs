@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class MalusManager : MonoBehaviour
 {
+    DataSaver dataSaver;
+
     bool allStar;
 
     GameManager gameManager;
@@ -28,6 +30,11 @@ public class MalusManager : MonoBehaviour
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
+        if(FindObjectOfType<DataSaver>() != null) 
+        {
+            dataSaver = FindObjectOfType<DataSaver>();
+            allStar = dataSaver.allStar;
+        }
     }
 
     public void GiveMalus(GameObject player) 

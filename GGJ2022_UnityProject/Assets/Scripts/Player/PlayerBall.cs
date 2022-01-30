@@ -66,7 +66,10 @@ public class PlayerBall : MonoBehaviour
 
     private void OnDisable()
     {
-        ballUI.SetActive(false);
+        if (ballUI != null)
+        {
+            ballUI.SetActive(false);
+        }
         malusManager.EndMalus();
     }
 

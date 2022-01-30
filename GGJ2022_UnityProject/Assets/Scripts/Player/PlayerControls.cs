@@ -44,6 +44,8 @@ public class PlayerControls : MonoBehaviour
     public string verticalStr = "Vertical P";
 
     public Animator playerAnimator;
+    public SoundManager soundManager;
+    public AudioSource playerSound;
 
     private void Awake()
     {
@@ -121,6 +123,8 @@ public class PlayerControls : MonoBehaviour
         Debug.Log(playerJoystick.joystickName + playerJoystick.joystickIndex);
 
         yield return new WaitForSeconds(inputLag);
+        playerSound.clip = soundManager.currentSounds[2];
+        playerSound.Play();
         playerAnimator.SetTrigger("Jumping");
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
@@ -170,6 +174,9 @@ public class PlayerControls : MonoBehaviour
     IEnumerator Dash(Vector2 dashDirection) 
     {
         yield return new WaitForSeconds(inputLag);
+
+        playerSound.clip = soundManager.currentSounds[0];
+        playerSound.Play();
 
         StartCoroutine(DashCooldown());
 
@@ -289,5 +296,7 @@ public class PlayerControls : MonoBehaviour
     public void CatchBall() 
     {
         playerBall.SetActive(true);
+        playerSound.clip = soundManager.currentSounds[4];
+        playerSound.Play();
     }
 }

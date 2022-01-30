@@ -35,6 +35,7 @@ public class GroundCheck : MonoBehaviour
     void SetIsGrounded() 
     {
         playerControls.isGrounded = isGrounded;
+        playerControls.playerAnimator.SetBool("IsGrounded", isGrounded);
         playerControls.SetAirControl();
     }
 }

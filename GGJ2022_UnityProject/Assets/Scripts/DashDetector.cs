@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
 public class DashDetector : MonoBehaviour
 {
@@ -51,13 +52,16 @@ public class DashDetector : MonoBehaviour
             Vector2 ejectDirection = (otherPlayer.transform.position - transform.position) + new Vector3(0, 0.5f, 0);
             otherPlayer.GetComponent<Rigidbody2D>().AddForce((ejectDirection * ejectForce), ForceMode2D.Impulse);
 
+
             if (otherPlayer.GetComponentInChildren<DashDetector>() == null)
             {
+                SetVibrationOnSelf(0.4f);
                 Time.timeScale = dataManager.slowMotionStrenght;
                 StartCoroutine(StopSlowMotion());
             }
             else 
-            { 
+            {
+                SetVibrationOnSelf(0.6f);
                 Time.timeScale = dataManager.bigSlowMotionStrenght;
                 StartCoroutine(BigSlowMotionWithZoom());
             }
@@ -69,6 +73,7 @@ public class DashDetector : MonoBehaviour
     IEnumerator StopSlowMotion() 
     {
         yield return new WaitForSeconds(dataManager.slowMotionDuration * Time.timeScale);
+        SetVibrationOnSelf(0f);
         Time.timeScale = 1f;
     }
 
@@ -111,6 +116,8 @@ public class DashDetector : MonoBehaviour
         }
 
         yield return new WaitForSeconds(dataManager.slowMotionDuration * Time.timeScale);
+        SetVibrationOnSelf(0f);
+
 
         for (int i = 0; i <= 10; i++)
         {
@@ -120,9 +127,38 @@ public class DashDetector : MonoBehaviour
             yield return new WaitForSeconds(0.01f / 10f);
         }
 
+        
+
         Camera.main.orthographicSize = 10f;
         Camera.main.transform.position = cameraOriginPosition;
         Time.timeScale = 1f;
 
+    }
+
+    void SetVibrationOnSelf(float intensity)        //A TESTER POUR VERIFIER
+    {
+        GameObject goMalusManager = FindObjectOfType<MalusManager>().gameObject;
+
+
+        if (goMalusManager.GetComponentInChildren<HellVibrationsMalus>() != null)
+        {
+            PlayerNumber targetFromHellVibration = goMalusManager.GetComponent<MalusManager>().targetPlayer.GetComponent<PlayerControls>().playerNumber;
+
+            if (GetComponentInParent<PlayerControls>().playerNumber != targetFromHellVibration)
+            {
+                intensity = Mathf.Clamp01(intensity);
+
+                if (GetComponentInParent<PlayerControls>().playerNumber == PlayerNumber.PlayerOne)
+                {
+                    GamePad.SetVibration(PlayerIndex.One, intensity, intensity);
+                }
+                else
+                {
+                    GamePad.SetVibration(PlayerIndex.Two, intensity, intensity);
+                }
+            }
+        }
+        
+       
     }
 }
